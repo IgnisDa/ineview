@@ -1,0 +1,58 @@
+{
+  "root": "apps/site",
+  "projectType": "application",
+  "sourceRoot": "apps/site/src",
+  "targets": {
+    "add": {
+      "executor": "@nxext/sveltekit:add"
+    },
+    "build": {
+      "executor": "@nxext/sveltekit:sveltekit",
+      "options": {
+        "command": "build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/site/**/*.{ts,svelte,spec.ts}"
+        ]
+      },
+      "outputs": [
+        "{options.outputFile}"
+      ]
+    },
+    "preview": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "npx http-server ./dist/apps/site -p 3000"
+      }
+    },
+    "serve": {
+      "executor": "@nxext/sveltekit:sveltekit",
+      "options": {
+        "command": "dev"
+      }
+    }
+  },
+  "tags": [],
+  "dependencies": {
+    "development": [
+      "@nxext/sveltekit",
+      "@sveltejs/adapter-node",
+      "@sveltejs/adapter-static@next",
+      "@sveltejs/kit",
+      "@unocss/preset-mini",
+      "@unocss/preset-wind",
+      "@unocss/reset",
+      "autoprefixer",
+      "eslint-plugin-svelte3",
+      "http-server",
+      "svelte",
+      "svelte-preprocess",
+      "unocss"
+    ],
+    "required": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+    // Version of the setting file.  Always 0.2
+    "version": "0.2",
+    // language - current active spelling language
+    "language": "en",
+    // words - list of words to be always considered correct
+    "words": [
+        "dockerignore",
+        "ineview",
+        "nrwl",
+        "nxext",
+        "pnpm",
+        "sveltejs",
+        "sveltekit",
+        "unocss"
+    ],
+    // flagWords - list of words to be always considered incorrect
+    // This is useful for offensive words and common spelling errors.
+    "flagWords": [],
+    // a list of globs to specify which files are to be ignored.
+    "ignorePaths": [
+        "node_modules/**",
+        "personal/**",
+        ".git/**",
+        "dist/**",
+        "pnpm-lock.yaml",
+        "package.json",
+        ".vscode/extensions.json",
+        ".gitignore",
+        ".dockerignore",
+        "*Dockerfile*",
+        ".devcontainer/scripts/*"
+    ]
+}
