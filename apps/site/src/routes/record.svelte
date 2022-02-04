@@ -30,6 +30,7 @@
       videos = [...videos, { filename, href }];
     };
     recorder.stop();
+    stream.getTracks().forEach((track) => track.stop());
     isStartBtnDisabled = false;
     isStopBtnDisabled = true;
     video.srcObject = undefined;
