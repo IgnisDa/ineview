@@ -18,6 +18,7 @@
     "VISUAL": "code --wait"
   },
   "features": {
-    "python": "latest"
+    "python": "latest",
+    "IgnisDa/developrs/fish@features-v0.0.1": {}
   }
 }
