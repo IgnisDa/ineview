@@ -5,6 +5,8 @@
     "dbaeumer.vscode-eslint",
     "svelte.svelte-vscode",
     "voorjaar.windicss-intellisense",
-    "fivethree.vscode-svelte-snippets"
+    "fivethree.vscode-svelte-snippets",
+    "bungcip.better-toml",
+    "ms-python.python"
   ]
 }

@@ -42,3 +42,6 @@ personal
 
 /apps/site/.svelte-kit
 /apps/site/build
+__pycache__
+.venv
+db.sqlite3

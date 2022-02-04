@@ -6,7 +6,10 @@
   "scripts": {
     "build": "nx build",
     "start": "nx serve",
-    "test": "nx test"
+    "test": "nx test",
+    "site": "npx nx serve site",
+    "server": "cd apps/server && poetry run python manage.py runserver",
+    "setup": "pnpm install && poetry install"
   },
   "devDependencies": {
     "@angular-devkit/schematics": "^13.2.2",
