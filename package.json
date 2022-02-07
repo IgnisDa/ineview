@@ -8,7 +8,7 @@
     "start": "nx serve",
     "test": "nx test",
     "site": "npx nx serve site",
-    "server": "cd apps/server && poetry run python manage.py runserver",
+    "server": "npx nx run server:serve",
     "setup": "pnpm install && poetry install"
   },
   "devDependencies": {

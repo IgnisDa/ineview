@@ -1,0 +1,19 @@
+{
+  "root": "apps/site",
+  "projectType": "application",
+  "sourceRoot": "apps/site/src",
+  "targets": {
+    "serve": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "poetry run python manage.py runserver",
+        "cwd": "apps/server"
+      }
+    }
+  },
+  "tags": [],
+  "dependencies": {
+    "development": [],
+    "required": []
+  }
+}

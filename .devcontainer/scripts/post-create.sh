@@ -7,3 +7,4 @@ git config --global user.email "${GIT_AUTHOR_EMAIL}"
 # Install the dependencies of each micro-service
 cd "$PROJECT_FOLDER"
 pnpm install
+pip3 install poetry
