@@ -14,6 +14,7 @@ specifiers:
   '@unocss/preset-wind': ^0.22.7
   '@unocss/reset': ^0.22.7
   autoprefixer: ^10.4.2
+  axios: ^0.25.0
   eslint-plugin-svelte3: ^3.4.0
   http-server: ^14.1.0
   prettier: ^2.5.1
@@ -36,6 +37,7 @@ devDependencies:
   '@unocss/preset-wind': 0.22.7
   '@unocss/reset': 0.22.7
   autoprefixer: 10.4.2
+  axios: 0.25.0
   eslint-plugin-svelte3: 3.4.0_svelte@3.46.4
   http-server: 14.1.0
   prettier: 2.5.1

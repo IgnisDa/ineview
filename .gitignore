@@ -45,3 +45,5 @@ personal
 __pycache__
 .venv
 db.sqlite3
+/apps/server/media
+.env*
