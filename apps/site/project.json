@@ -47,6 +47,7 @@
       "@unocss/preset-wind",
       "@unocss/reset",
       "autoprefixer",
+      "axios",
       "eslint-plugin-svelte3",
       "http-server",
       "svelte",

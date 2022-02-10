@@ -1,4 +1,7 @@
 <script lang="ts">
+  import axios from 'axios';
+  import { variables } from '../lib/environment';
+
   let stream: MediaStream;
   let recorder: MediaRecorder;
   let video: HTMLVideoElement;
@@ -24,9 +27,17 @@
   };
 
   const stopRecording = () => {
-    recorder.ondataavailable = (e) => {
+    recorder.ondataavailable = async (e) => {
       const filename = ['video_', new Date().toISOString(), '.webm'].join('');
       const href = URL.createObjectURL(e.data);
+      let data = new FormData();
+      data.append('file', e.data);
+      const response = await axios.post(
+        `${variables.basePath}/video/upload/`,
+        data,
+        { headers: { 'Content-Type': 'multipart/form-data' } }
+      );
+      console.log(response);
       videos = [...videos, { filename, href }];
     };
     recorder.stop();
