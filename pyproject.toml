@@ -3,6 +3,7 @@ name = "server"
 version = "0.1.0"
 description = "The backend server for the ineview services"
 license = "MIT"
+authors = []
 
 [tool.poetry.dependencies]
 Django = "^4.0.2"

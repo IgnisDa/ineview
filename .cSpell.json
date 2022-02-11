@@ -5,9 +5,13 @@
     "language": "en",
     // words - list of words to be always considered correct
     "words": [
+        "convolutional",
         "devcontainer",
         "dockerignore",
         "ineview",
+        "Inéview",
+        "lemmatization",
+        "ngrams",
         "nrwl",
         "nxext",
         "pnpm",
