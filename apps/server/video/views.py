@@ -31,4 +31,4 @@ class ProcessVideoView(APIView):
         # TODO: Call code for processing the video
         video.is_processed = True
         video.save()
-        return JsonResponse({"status": True}, status=500)
+        return JsonResponse({"status": True})
