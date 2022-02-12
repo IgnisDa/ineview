@@ -1,7 +1,8 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
   import NProgress from 'nprogress';
   import 'nprogress/nprogress.css';
-  import { httpService } from '../lib/http';
+  import { httpService } from '$lib/http';
 
   let stream: MediaStream;
   let recorder: MediaRecorder;
@@ -28,17 +29,32 @@
       let form = new FormData();
       form.append('file', e.data);
       NProgress.start();
-      const { data } = await httpService.post('/video/upload/', form, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const { data } = await httpService.post<{ id: number }>(
+        '/video/upload/',
+        form,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        }
+      );
+      await startProcessing(data.id);
       NProgress.done();
-      console.log(data);
     };
     recorder.stop();
     stream.getTracks().forEach((track) => track.stop());
     isStartBtnDisabled = false;
     isStopBtnDisabled = true;
     video.srcObject = undefined;
+  };
+
+  const startProcessing = async (videoId: number) => {
+    const { data } = await httpService.post<{ status: boolean }>(
+      `/video/process/${videoId}`
+    );
+    if (!data.status)
+      alert('There was an error while processing your video, please try again');
+    else {
+      goto(`/stats/video-${videoId}`);
+    }
   };
 </script>
 

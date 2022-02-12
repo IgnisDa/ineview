@@ -1,6 +1,5 @@
 {
   "extends": "../../tsconfig.base.json",
-
   "compilerOptions": {
     "moduleResolution": "node",
     "target": "es2017",
@@ -16,12 +15,26 @@
      */
     "sourceMap": true,
     /** Requests the runtime types from the svelte modules by default. Needed for TS files or else you get errors. */
-    "types": ["svelte"],
-
+    "types": [
+      "svelte"
+    ],
+    "baseUrl": ".",
     "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "$app/*": [
+        ".svelte-kit/dev/runtime/app/*",
+        ".svelte-kit/build/runtime/app/*"
+      ],
+      "$lib/*": [
+        "src/lib/*"
+      ],
+      "$stores": [
+        "src/stores/index.ts"
+      ],
+    }
   },
   "files": [],
   "include": [],
