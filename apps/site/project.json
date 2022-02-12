@@ -15,13 +15,9 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/site/**/*.{ts,svelte,spec.ts}"
-        ]
+        "lintFilePatterns": ["apps/site/**/*.{ts,svelte,spec.ts}"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "preview": {
       "executor": "@nrwl/workspace:run-commands",
@@ -43,6 +39,7 @@
       "@sveltejs/adapter-node",
       "@sveltejs/adapter-static@next",
       "@sveltejs/kit",
+      "@types/nprogress",
       "@unocss/preset-mini",
       "@unocss/preset-wind",
       "@unocss/reset",
@@ -50,6 +47,7 @@
       "axios",
       "eslint-plugin-svelte3",
       "http-server",
+      "nprogress",
       "svelte",
       "svelte-preprocess",
       "unocss"
