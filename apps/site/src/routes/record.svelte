@@ -1,6 +1,7 @@
 <script lang="ts">
-  import axios from 'axios';
-  import { variables } from '../lib/environment';
+  import NProgress from 'nprogress';
+  import 'nprogress/nprogress.css';
+  import { httpService } from '../lib/http';
 
   let stream: MediaStream;
   let recorder: MediaRecorder;
@@ -9,8 +10,6 @@
   let isStopBtnDisabled = true;
   let isStartBtnDisabled = false;
 
-  let videos = Array<{ filename: string; href: string }>();
-
   const startRecording = async () => {
     const stm = await navigator.mediaDevices.getUserMedia({
       video: true,
@@ -18,9 +17,7 @@
     });
     stream = stm;
     video.srcObject = stream;
-    recorder = new MediaRecorder(stream, {
-      mimeType: 'video/webm',
-    });
+    recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
     recorder.start();
     isStartBtnDisabled = true;
     isStopBtnDisabled = false;
@@ -28,17 +25,14 @@
 
   const stopRecording = () => {
     recorder.ondataavailable = async (e) => {
-      const filename = ['video_', new Date().toISOString(), '.webm'].join('');
-      const href = URL.createObjectURL(e.data);
-      let data = new FormData();
-      data.append('file', e.data);
-      const response = await axios.post(
-        `${variables.basePath}/video/upload/`,
-        data,
-        { headers: { 'Content-Type': 'multipart/form-data' } }
-      );
-      console.log(response);
-      videos = [...videos, { filename, href }];
+      let form = new FormData();
+      form.append('file', e.data);
+      NProgress.start();
+      const { data } = await httpService.post('/video/upload/', form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      NProgress.done();
+      console.log(data);
     };
     recorder.stop();
     stream.getTracks().forEach((track) => track.stop());
@@ -65,18 +59,6 @@
       Stop Recording
     </button>
   </div>
-  {#if videos.length > 0}
-    <div>
-      <span>Downloads List:</span>
-      <ul>
-        {#each videos as video}
-          <li>
-            <a href={video.href} download={video.filename}>{video.filename}</a>
-          </li>
-        {/each}
-      </ul>
-    </div>
-  {/if}
   <div class="flex items-center justify-center">
     <div class="rounded-lg bg-gray-800 h-700px w-800px relative">
       <video
