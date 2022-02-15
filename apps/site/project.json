@@ -48,7 +48,9 @@
       "eslint-plugin-svelte3",
       "http-server",
       "nprogress",
+      "sass",
       "svelte",
+      "svelte-icons",
       "svelte-preprocess",
       "unocss"
     ],

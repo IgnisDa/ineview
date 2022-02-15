@@ -3,6 +3,6 @@
   import '@unocss/reset/tailwind.css';
 </script>
 
-<div class="min-h-screen bg-warm-gray-800">
+<div class="flex min-h-screen bg-gray-900">
   <slot />
 </div>
