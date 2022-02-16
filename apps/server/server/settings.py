@@ -18,9 +18,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # custom apps
     "video",
+    "questions",
     # third party apps
     "corsheaders",
     "rest_framework",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [

@@ -16,6 +16,7 @@ tensorflow-gpu = "^2.8.0"
 fer = "^22.0.1"
 ffmpeg-python = "^0.2.0"
 schedule = "^1.1.0"
+django-extensions = "^3.1.5"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
