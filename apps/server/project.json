@@ -6,8 +6,7 @@
     "serve": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "poetry run python manage.py runserver",
-        "cwd": "apps/server"
+        "command": "poetry run python apps/server/manage.py runserver"
       }
     }
   },

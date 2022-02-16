@@ -1,7 +1,10 @@
 import os
+import sys
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+sys.path.append(str(BASE_DIR.parent.parent))
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dummy-key")
 
@@ -22,8 +25,15 @@ INSTALLED_APPS = [
     # third party apps
     "corsheaders",
     "rest_framework",
-    "django_extensions",
+    "rest_framework.authtoken",
+    "rest_auth",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "rest_auth.registration",
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -95,8 +105,13 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+ACCOUNT_AUTHENTICATION_METHOD = "username"
+
 if DEBUG:
     CORS_ALLOWED_ORIGINS = [
         "http://localhost:3000",
     ]
     ALLOWED_HOSTS = ["*"]
+    INSTALLED_APPS.append("django_extensions")
