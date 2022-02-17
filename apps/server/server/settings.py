@@ -1,16 +1,15 @@
 import os
-import sys
 from pathlib import Path
+
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-sys.path.append(str(BASE_DIR.parent.parent))
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-dummy-key")
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dummy-key")
+DEBUG = os.getenv("DJANGO_DEBUG", "") != "False"
 
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -37,6 +36,7 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -103,6 +103,10 @@ STATIC_URL = "static/"
 
 MEDIA_ROOT = BASE_DIR / "media"
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
@@ -110,8 +114,28 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_AUTHENTICATION_METHOD = "username"
 
 if DEBUG:
-    CORS_ALLOWED_ORIGINS = [
-        "http://localhost:3000",
-    ]
-    ALLOWED_HOSTS = ["*"]
+    CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
     INSTALLED_APPS.append("django_extensions")
+else:
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES["default"].update(db_from_env)
+    CORS_ALLOWED_ORIGINS = ["https://ineview.netlify.app"]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "/tmp/debug.log",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+    },
+}

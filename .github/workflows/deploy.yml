@@ -1,0 +1,25 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    outputs:
+      affected: ${{ steps.affected-projects.outputs.affected }}
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout main
+        with:
+          fetch-depth: 0
+
+      - name: Deploy server app
+        uses: dokku/github-action@master
+        with:
+          branch: 'main'
+          git_push_flags: '--force'
+          git_remote_url: 'ssh://dokku@${{ secrets.DOKKU_HOST }}:22/ineview-server'
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}

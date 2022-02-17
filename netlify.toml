@@ -1,0 +1,10 @@
+
+[build]
+    command = "npx pnpm install --store=node_modules/.pnpm-store && npx nx build site"
+    publish = "dist/apps/site"
+
+[build.environment]
+    NODE_VERSION="16.13.2"
+    NPM_FLAGS = "--version"
+    VITE_PUBLIC_COUNTDOWN_TIMER="60"
+    VITE_PUBLIC_BASE_PATH="https://ineview-server.ignisda.tech"

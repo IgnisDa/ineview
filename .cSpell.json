@@ -8,6 +8,8 @@
         "convolutional",
         "devcontainer",
         "dockerignore",
+        "dokku",
+        "gunicorn",
         "ineview",
         "Inéview",
         "lemmatization",
@@ -20,7 +22,8 @@
         "sveltejs",
         "sveltekit",
         "unocss",
-        "vite"
+        "vite",
+        "wsgi"
     ],
     // flagWords - list of words to be always considered incorrect
     // This is useful for offensive words and common spelling errors.
