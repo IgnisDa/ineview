@@ -4,9 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "nx build",
-    "start": "nx serve",
-    "test": "nx test",
+    "prebuild": "test \"$CI\" = true && npx pnpm install -r --store=node_modules/.pnpm-store || echo skipping pnpm install",
     "site": "npx nx serve site",
     "server": "npx nx run server:serve",
     "setup": "pnpm install && poetry install"
