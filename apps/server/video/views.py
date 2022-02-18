@@ -34,7 +34,7 @@ class ProcessVideoView(APIView):
             video = VideoUpload.objects.get(id=video_id)
         except VideoUpload.DoesNotExist:
             return JsonResponse({"status": False}, status=404)
-        data = process_video(video.video_file.path)
+        data = process_video(video.video_file.path, video.id)
         video.is_processed = True
         video.save()
         return JsonResponse({"status": True, "data": data})
