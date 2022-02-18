@@ -122,6 +122,7 @@ else:
     CORS_ORIGIN_ALLOW_ALL = False
     CORS_ALLOWED_ORIGINS = [
         "https://ineview.netlify.app",
+        "http://localhost:3000",
     ]
 
 LOGGING = {
