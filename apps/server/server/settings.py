@@ -114,12 +114,15 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_AUTHENTICATION_METHOD = "username"
 
 if DEBUG:
-    CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+    CORS_ORIGIN_ALLOW_ALL = True
     INSTALLED_APPS.append("django_extensions")
 else:
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES["default"].update(db_from_env)
-    CORS_ALLOWED_ORIGINS = ["https://ineview.netlify.app"]
+    CORS_ORIGIN_ALLOW_ALL = False
+    CORS_ALLOWED_ORIGINS = [
+        "https://ineview.netlify.app",
+    ]
 
 LOGGING = {
     "version": 1,

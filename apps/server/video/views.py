@@ -5,6 +5,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from rest_framework.views import APIView
 
+from .emotion_recognition import process_video
 from .models import VideoUpload
 
 
@@ -14,7 +15,12 @@ class VideoUploadView(APIView):
         file_obj.name = f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.webm"
         video = VideoUpload(video_file=file_obj)
         video.save()
-        ffmpeg.input(video.video_file.path).output(f"{video.video_file.path}.mp4").run()
+        (
+            ffmpeg.input(video.video_file.path)
+            .filter("fps", fps=1, round="up")
+            .output(f"{video.video_file.path}.mp4")
+            .run()
+        )
         video.video_file.name = (
             f"{video.video_file.name.replace(str(settings.MEDIA_ROOT), '')}.mp4"
         )
@@ -28,7 +34,7 @@ class ProcessVideoView(APIView):
             video = VideoUpload.objects.get(id=video_id)
         except VideoUpload.DoesNotExist:
             return JsonResponse({"status": False}, status=404)
-        # TODO: Call code for processing the video
+        data = process_video(video.video_file.path)
         video.is_processed = True
         video.save()
-        return JsonResponse({"status": True})
+        return JsonResponse({"status": True, "data": data})
