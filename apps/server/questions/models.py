@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.conf import settings
 from django.db import models
 
@@ -26,6 +28,14 @@ class Question(models.Model):
         null=True,
         blank=True,
         help_text="An optional description of the question",
+    )
+    thinking_duration = models.DurationField(
+        help_text="The amount of time that would be given to think about this question",
+        default=timedelta(seconds=30),
+    )
+    answer_duration = models.DurationField(
+        help_text="The amount of time that would be given to answer this question",
+        default=timedelta(seconds=60),
     )
 
     def __str__(self):
