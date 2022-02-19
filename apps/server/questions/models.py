@@ -10,6 +10,10 @@ class QuestionSet(models.Model):
         on_delete=models.CASCADE,
         help_text="The user who created this set",
     )
+    created_date = models.DateTimeField(
+        auto_now_add=True,
+        help_text="The date and time this question set was created on",
+    )
 
     def __str__(self):
         return f"Question set by: {self.user}, ID: {self.id}"
