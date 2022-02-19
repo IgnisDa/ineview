@@ -113,10 +113,20 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 
 ACCOUNT_AUTHENTICATION_METHOD = "username"
 
+TIME_ZONE = "Asia/Kolkata"
+
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+]
+
 if DEBUG:
     CORS_ORIGIN_ALLOW_ALL = True
+    SHELL_PLUS = "ipython"
     INSTALLED_APPS.append("django_extensions")
 else:
+    PASSWORD_HASHERS.insert(0, "django.contrib.auth.hashers.Argon2PasswordHasher")
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES["default"].update(db_from_env)
     CORS_ORIGIN_ALLOW_ALL = False
