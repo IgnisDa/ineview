@@ -6,3 +6,7 @@
 <div class="flex min-h-screen bg-gray-900">
   <slot />
 </div>
+
+<style>
+  @import 'nprogress/nprogress.css';
+</style>
