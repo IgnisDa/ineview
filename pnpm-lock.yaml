@@ -17,6 +17,7 @@ specifiers:
   '@unocss/reset': ^0.22.7
   autoprefixer: ^10.4.2
   axios: ^0.25.0
+  cross-env: ^7.0.3
   eslint: ^8.9.0
   eslint-plugin-svelte3: ^3.4.0
   http-server: ^14.1.0
@@ -47,6 +48,7 @@ devDependencies:
   '@unocss/reset': 0.22.7
   autoprefixer: 10.4.2_postcss@8.4.6
   axios: 0.25.0
+  cross-env: 7.0.3
   eslint: 8.9.0
   eslint-plugin-svelte3: 3.4.0_eslint@8.9.0+svelte@3.46.4
   http-server: 14.1.0
@@ -1626,6 +1628,14 @@ packages:
   /corser/2.0.1:
     resolution: {integrity: sha1-jtolLsqrWEDc2XXOuQ2TcMgZ/4c=}
     engines: {node: '>= 0.4.0'}
+    dev: true
+
+  /cross-env/7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
     dev: true
 
   /cross-spawn/7.0.3:

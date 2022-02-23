@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "site": "npx nx serve site",
-    "server": "npx nx run server:serve",
+    "server": "cross-env PYTHONUNBUFFERED=1 npx nx run server:serve",
     "setup": "pnpm install && poetry install"
   },
   "devDependencies": {
@@ -25,6 +25,7 @@
     "@unocss/reset": "^0.22.7",
     "autoprefixer": "^10.4.2",
     "axios": "^0.25.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.9.0",
     "eslint-plugin-svelte3": "^3.4.0",
     "http-server": "^14.1.0",
