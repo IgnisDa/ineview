@@ -4,13 +4,13 @@ import time
 
 from schedule import Scheduler
 
-from .models import VideoUpload
+from . import models
 
 
 def run_continuously(self, interval=1):
     """Continuously run, while executing pending jobs at each elapsed
     time interval.
-    @return cease_continuous_run: threading.Event which can be set to
+    @returns cease_continuous_run: threading.Event which can be set to
     cease continuous run.
     Please note that it is *intended behavior that run_continuously()
     does not run missed jobs*. For example, if you've registered a job
@@ -38,16 +38,19 @@ Scheduler.run_continuously = run_continuously
 
 
 def delete_processed_videos():
-    to_delete_videos = VideoUpload.objects.filter(is_processed=True)
-    for video in to_delete_videos:
-        mp4_file_path = video.video_file.path
-        webm_file_path = video.video_file.path.replace(".mp4", "")
-        os.remove(mp4_file_path)
-        os.remove(webm_file_path)
-    to_delete_videos.delete()
+    for attempt_set in models.AttemptSet.objects.all():
+        if not attempt_set.is_processed:
+            continue
+        for attempt in attempt_set:
+            mp4_file_path = attempt.video_file.path
+            webm_file_path = attempt.video_file.path.replace(".mp4", "")
+            os.remove(mp4_file_path)
+            os.remove(webm_file_path)
+            attempt.is_purged = True
+            attempt.save()
 
 
 def start_scheduler():
     scheduler = Scheduler()
-    scheduler.every(3).minutes.do(delete_processed_videos)
+    scheduler.every(5).minutes.do(delete_processed_videos)
     scheduler.run_continuously()

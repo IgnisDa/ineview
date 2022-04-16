@@ -1,8 +1,13 @@
 from django.contrib import admin
 
-from .models import VideoUpload
+from . import models
 
 
-@admin.register(VideoUpload)
-class VideoAdmin(admin.ModelAdmin):
+@admin.register(models.Attempt)
+class AttemptAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.AttemptSet)
+class AttemptSetAdmin(admin.ModelAdmin):
     pass
