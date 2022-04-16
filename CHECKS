@@ -1,5 +1,0 @@
-TIMEOUT=10
-ATTEMPTS=5
-WAIT=10
-
-/status true
