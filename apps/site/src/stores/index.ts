@@ -12,3 +12,9 @@ export const questions_set = persist<number>(
   localStorage(),
   'questions_set'
 );
+
+export const attempt_set = persist<number>(
+  writable(),
+  localStorage(),
+  'attempt_set'
+);

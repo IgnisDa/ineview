@@ -12,6 +12,6 @@
   export let title;
 </script>
 
-<div class="text-white text-center">
+<div class="text-center">
   <h1 class="text-2xl">{title}</h1>
 </div>
