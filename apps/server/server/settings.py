@@ -121,10 +121,19 @@ PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "user.authentication.BearerAuthentication",
+    ],
+}
+
 if DEBUG:
     CORS_ORIGIN_ALLOW_ALL = True
     SHELL_PLUS = "ipython"
     INSTALLED_APPS.append("django_extensions")
+    REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"].append(
+        "rest_framework.authentication.SessionAuthentication"
+    )
 else:
     PASSWORD_HASHERS.insert(0, "django.contrib.auth.hashers.Argon2PasswordHasher")
     db_from_env = dj_database_url.config(conn_max_age=500)
