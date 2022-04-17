@@ -15,8 +15,8 @@ urlpatterns = [
         name="create_attempt",
     ),
     path(
-        "process/<int:attempt_id>/",
-        views.ProcessAttemptView.as_view(),
+        "process/<int:attempt_set_id>/",
+        views.ProcessAttemptSetView.as_view(),
         name="process_attempt",
     ),
 ]

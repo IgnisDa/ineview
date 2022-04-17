@@ -48,14 +48,22 @@ class CreateAttemptView(APIView):
         return JsonResponse({"id": instance.id})
 
 
-class ProcessAttemptView(APIView):
-    def post(self, request, attempt_id):
+class ProcessAttemptSetView(APIView):
+    def post(self, request, attempt_set_id):
         try:
-            attempt = models.Attempt.objects.get(id=attempt_id)
-        except models.Attempt.DoesNotExist:
+            attempt_set = models.AttemptSet.objects.get(id=attempt_set_id)
+        except models.AttemptSet.DoesNotExist:
             return JsonResponse({"status": False}, status=404)
-        data = emotion_recognition.process_video(attempt.video_file.path, attempt.id)
-        attempt.is_processed = True
-        attempt.data = data
-        attempt.save()
-        return JsonResponse({"status": True, "data": data})
+        final_data = []
+        for attempt in attempt_set.attempt_set.all():
+            if attempt.is_processed:
+                data = attempt.data
+            else:
+                data = emotion_recognition.process_video(
+                    attempt.video_file.path, attempt.id
+                )
+                attempt.is_processed = True
+                attempt.data = data
+                attempt.save()
+            final_data.append(data)
+        return JsonResponse({"status": True, "data": final_data})
