@@ -15,9 +15,13 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/site/**/*.{ts,svelte,spec.ts}"]
+        "lintFilePatterns": [
+          "apps/site/**/*.{ts,svelte,spec.ts}"
+        ]
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "preview": {
       "executor": "@nrwl/workspace:run-commands",
@@ -40,6 +44,7 @@
       "@sveltejs/adapter-node",
       "@sveltejs/kit",
       "@types/nprogress",
+      "@types/randomcolor",
       "@unocss/preset-mini",
       "@unocss/preset-wind",
       "@unocss/reset",
@@ -51,8 +56,10 @@
       "http-server",
       "nprogress",
       "postcss",
+      "randomcolor",
       "sass",
       "svelte",
+      "svelte-chartjs",
       "svelte-icons",
       "svelte-preprocess",
       "unocss"

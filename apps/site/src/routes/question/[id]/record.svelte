@@ -24,11 +24,6 @@
   let question;
   let description;
 
-  $: thinking_duration = details?.thinking_duration;
-  $: answer_duration = details?.answer_duration;
-  $: question = details?.text;
-  $: description = details?.description;
-
   let stream: MediaStream;
   let recorder: MediaRecorder;
   let video: HTMLVideoElement;
@@ -42,6 +37,10 @@
       `/questions/questions/${$page.params.id}`
     );
     details = data;
+    thinking_duration = details?.thinking_duration;
+    answer_duration = details?.answer_duration;
+    question = details?.text;
+    description = details?.description;
     loading = false;
     $questions = $questions.slice(1);
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -89,19 +88,18 @@
       let form = new FormData();
       form.append('file', e.data);
       NProgress.start();
-      const { data } = await httpService.post<{ id: number }>(
+      await httpService.post<{ id: number }>(
         `/video/attempt/${$page.params.id}/${$attempt_set}/`,
         form,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
-      // start processing the video but dont wait for the response
-      httpService.post(`/video/process/${data.id}/`);
       if ($questions.length > 0) {
         location.assign(`/question/${$questions[0]}/record`);
       } else {
-        // TODO: Redirect to `/attempt` page
-        goto(`/questions-set/${$questions_set}/stats`);
+        await httpService.post(`/video/process/${$attempt_set}/`);
+        goto(`/attempt-set/${$attempt_set}/stats`);
         $questions_set = null;
+        $attempt_set = null;
         $questions = null;
       }
       NProgress.done();

@@ -19,6 +19,6 @@
   },
   "features": {
     "python": "latest",
-    "IgnisDa/developrs/fish@features-v0.0.1": {}
+    "fish": "latest"
   }
 }
